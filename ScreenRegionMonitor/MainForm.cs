@@ -31,12 +31,16 @@ namespace ScreenRegionMonitor
             captureImage = Snapshot.FromBitmap(CaptureRegion(region));
             captureRegion = region;
             Log("Received screen capture.");
+            Show();
         }
 
         private void captureButton_Click(object sender, EventArgs e)
         {
+            FormBorderStyle = FormBorderStyle.None; 
+            Hide();
             captureForm = new CaptureForm(this);
             captureForm.Show();
+            FormBorderStyle = FormBorderStyle.Sizable;
         }
 
         private void startButton_Click(object sender, EventArgs e)
@@ -51,6 +55,7 @@ namespace ScreenRegionMonitor
             startButton.Enabled = false;
             commandTextBox.Enabled = false;
             captureButton.Enabled = false;
+            testCommandsButton.Enabled = false;
             consecutiveFailures = 0;
         }
 
@@ -118,6 +123,7 @@ namespace ScreenRegionMonitor
             stopButton.Enabled = false;
             commandTextBox.Enabled = true;
             captureButton.Enabled = true;
+            testCommandsButton.Enabled = true;
         }
 
         private void Log(string text)
@@ -144,6 +150,11 @@ namespace ScreenRegionMonitor
             {
                 commandTextBox.Text = File.ReadAllText(CACHE_FILE_NAME);
             }
+        }
+
+        private void testCommandsButton_Click(object sender, EventArgs e)
+        {
+            RunCommands();
         }
     }
 }
