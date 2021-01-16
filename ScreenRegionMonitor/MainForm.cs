@@ -78,7 +78,7 @@ namespace ScreenRegionMonitor
                     Log("Running commands and stopping.");
                     RunCommands();
                     Stop();
-                    SaveDiffToDisk();
+                    SaveCaptures();
                 }
             }
             else
@@ -86,10 +86,12 @@ namespace ScreenRegionMonitor
                 consecutiveFailures = 0;
             }
 
-            void SaveDiffToDisk()
+            void SaveCaptures()
             {
                 var difference = Snapshot.FromBitmap(captureImage).CompareTo(Snapshot.FromBitmap(current));
-                difference.ToFile("joj.png", ImageFormat.Png);
+                difference.ToFile("difference.png", ImageFormat.Png);
+                captureImage.Save("expected.png", ImageFormat.Png);
+                current.Save("observed.png", ImageFormat.Png);
             }
         }
 
