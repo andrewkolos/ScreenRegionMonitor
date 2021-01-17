@@ -18,8 +18,8 @@ namespace ScreenRegionMonitor
     {
 
         private static string CACHE_FILE_NAME = "cache.txt";
-        private static int PER_PIXEL_DIFF_TOLERANCE = 10;
-        private static int MAX_CONSEC_FAILURES = 10;
+        private static int DEFAULT_PER_PIXEL_DIFF_TOLERANCE = 50;
+        private static int DEFAULT_MAX_CONSEC_FAILURES = 10;
         public Form captureForm { get; set; }
         private Rectangle captureRegion;
         private Bitmap captureImage;
@@ -73,7 +73,7 @@ namespace ScreenRegionMonitor
                 consecutiveFailures++;
                 Log("Image match failed " + consecutiveFailures + " times consecutively.");
 
-                if (consecutiveFailures > MAX_CONSEC_FAILURES)
+                if (consecutiveFailures > int.Parse(maxConsecutiveFailuresTextBox.Text))
                 {
                     Log("Running commands and stopping.");
                     SaveCaptures();
@@ -164,14 +164,25 @@ namespace ScreenRegionMonitor
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            File.WriteAllText(CACHE_FILE_NAME, commandTextBox.Text);
+            File.WriteAllLines(CACHE_FILE_NAME, new string[] {
+                toleranceTextBox.Text,
+                maxConsecutiveFailuresTextBox.Text,
+            }.Concat(commandTextBox.Lines));
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             if (File.Exists(CACHE_FILE_NAME))
             {
-                commandTextBox.Text = File.ReadAllText(CACHE_FILE_NAME);
+                var lines = File.ReadAllLines(CACHE_FILE_NAME);
+                toleranceTextBox.Text = lines[0];
+                maxConsecutiveFailuresTextBox.Text = lines[1];
+                commandTextBox.Text = string.Join("\r\n", lines.Skip(2));
+            }
+            else
+            {
+                toleranceTextBox.Text = DEFAULT_PER_PIXEL_DIFF_TOLERANCE.ToString();
+                maxConsecutiveFailuresTextBox.Text = DEFAULT_MAX_CONSEC_FAILURES.ToString();
             }
         }
 
@@ -203,7 +214,7 @@ namespace ScreenRegionMonitor
 
             for (int n = 0; n <= bytes - 1; n++)
             {
-                if (Math.Abs(b1bytes[n] - b2bytes[n]) > PER_PIXEL_DIFF_TOLERANCE)
+                if (Math.Abs(b1bytes[n] - b2bytes[n]) > int.Parse(toleranceTextBox.Text))
                 {
                     result = false;
                     break;
