@@ -39,7 +39,7 @@ namespace ScreenRegionMonitor
 
         private void captureButton_Click(object sender, EventArgs e)
         {
-            FormBorderStyle = FormBorderStyle.None; 
+            FormBorderStyle = FormBorderStyle.None;
             Hide();
             captureForm = new CaptureForm(this);
             captureForm.Show();
@@ -76,9 +76,11 @@ namespace ScreenRegionMonitor
                 if (consecutiveFailures > MAX_CONSEC_FAILURES)
                 {
                     Log("Running commands and stopping.");
+                    SaveCaptures();
+                    SaveDifference();
+                    PrintScreen();
                     RunCommands();
                     Stop();
-                    SaveCaptures();
                 }
             }
             else
@@ -88,10 +90,23 @@ namespace ScreenRegionMonitor
 
             void SaveCaptures()
             {
-                var difference = Snapshot.FromBitmap(captureImage).CompareTo(Snapshot.FromBitmap(current));
-                difference.ToFile("difference.png", ImageFormat.Png);
                 captureImage.Save("expected.png", ImageFormat.Png);
                 current.Save("observed.png", ImageFormat.Png);
+            }
+
+            void SaveDifference()
+            {
+                var difference = Snapshot.FromBitmap(captureImage).CompareTo(Snapshot.FromBitmap(current));
+                difference.ToFile("difference.png", ImageFormat.Png);
+            }
+
+            void PrintScreen()
+            {
+                var bounds = Screen.PrimaryScreen.Bounds;
+                var screen = new Bitmap(bounds.Width, bounds.Height);
+                var graphics = Graphics.FromImage(screen);
+                graphics.CopyFromScreen(0, 0, 0, 0, screen.Size);
+                screen.Save("screen.png", ImageFormat.Png);
             }
         }
 
