@@ -62,7 +62,7 @@ namespace ScreenRegionMonitor
             this.captureButton.Location = new System.Drawing.Point(12, 372);
             this.captureButton.Name = "captureButton";
             this.captureButton.Size = new System.Drawing.Size(75, 27);
-            this.captureButton.TabIndex = 8;
+            this.captureButton.TabIndex = 9;
             this.captureButton.Text = "Capture";
             this.captureButton.UseVisualStyleBackColor = true;
             this.captureButton.Click += new System.EventHandler(this.captureButton_Click);
@@ -73,7 +73,7 @@ namespace ScreenRegionMonitor
             this.startButton.Location = new System.Drawing.Point(172, 372);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(75, 27);
-            this.startButton.TabIndex = 10;
+            this.startButton.TabIndex = 11;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);
@@ -84,7 +84,7 @@ namespace ScreenRegionMonitor
             this.stopButton.Location = new System.Drawing.Point(252, 372);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(75, 27);
-            this.stopButton.TabIndex = 11;
+            this.stopButton.TabIndex = 12;
             this.stopButton.Text = "Stop";
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
@@ -109,7 +109,7 @@ namespace ScreenRegionMonitor
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.ReadOnly = true;
             this.logTextBox.Size = new System.Drawing.Size(315, 151);
-            this.logTextBox.TabIndex = 7;
+            this.logTextBox.TabIndex = 8;
             this.logTextBox.Text = "";
             // 
             // label2
@@ -118,7 +118,7 @@ namespace ScreenRegionMonitor
             this.label2.Location = new System.Drawing.Point(13, 198);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(25, 13);
-            this.label2.TabIndex = 6;
+            this.label2.TabIndex = 13;
             this.label2.Text = "Log";
             // 
             // testCommandsButton
@@ -126,7 +126,7 @@ namespace ScreenRegionMonitor
             this.testCommandsButton.Location = new System.Drawing.Point(92, 372);
             this.testCommandsButton.Name = "testCommandsButton";
             this.testCommandsButton.Size = new System.Drawing.Size(75, 27);
-            this.testCommandsButton.TabIndex = 9;
+            this.testCommandsButton.TabIndex = 10;
             this.testCommandsButton.Text = "Test Cmds";
             this.testCommandsButton.UseVisualStyleBackColor = true;
             this.testCommandsButton.Click += new System.EventHandler(this.testCommandsButton_Click);
@@ -172,15 +172,14 @@ namespace ScreenRegionMonitor
             this.modeComboBox.Location = new System.Drawing.Point(16, 145);
             this.modeComboBox.Name = "modeComboBox";
             this.modeComboBox.Size = new System.Drawing.Size(311, 21);
-            this.modeComboBox.TabIndex = 12;
-            this.modeComboBox.SelectedIndexChanged += new System.EventHandler(this.modeComboBox_SelectedIndexChanged);
+            this.modeComboBox.TabIndex = 6;
             // 
             // colorButton
             // 
             this.colorButton.Location = new System.Drawing.Point(16, 173);
             this.colorButton.Name = "colorButton";
             this.colorButton.Size = new System.Drawing.Size(311, 23);
-            this.colorButton.TabIndex = 13;
+            this.colorButton.TabIndex = 7;
             this.colorButton.Text = "Pick Color";
             this.colorButton.UseVisualStyleBackColor = true;
             this.colorButton.Click += new System.EventHandler(this.colorButton_Click);

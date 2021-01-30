@@ -56,6 +56,20 @@ namespace ScreenRegionMonitor
 
         private void Start()
         {
+            var text = modeComboBox.SelectedItem as string;
+
+            Action<string> logFunc = logText => Log(logText);
+
+            if (text.Equals("Detect Difference"))
+            {
+                captureVerifier = new SamenessCaptureVerifier(int.Parse(toleranceTextBox.Text), logFunc);
+            }
+
+            if (text.Equals("Detect Color"))
+            {
+                captureVerifier = new NoColorVerifier(colorButton.BackColor, int.Parse(toleranceTextBox.Text), logFunc);
+            }
+
             screenCheckTimer.Start();
             stopButton.Enabled = true;
             startButton.Enabled = false;
@@ -209,25 +223,5 @@ namespace ScreenRegionMonitor
             }
         }
 
-        private void modeComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var text = modeComboBox.SelectedItem as string;
-
-            Action<string> logFunc = logText => Log(logText);
-
-            if (text.Equals("Detect Difference"))
-            {
-                toleranceTextBox.Enabled = true;
-                colorButton.Enabled = false;
-                captureVerifier = new SamenessCaptureVerifier(int.Parse(toleranceTextBox.Text), logFunc);
-            }
-
-            if (text.Equals("Detect Color"))
-            {
-                toleranceTextBox.Enabled = false;
-                colorButton.Enabled = true;
-                captureVerifier = new NoColorVerifier(colorButton.BackColor, logFunc);
-            }
-        }
     }
 }

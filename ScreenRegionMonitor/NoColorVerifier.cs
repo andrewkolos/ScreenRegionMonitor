@@ -12,12 +12,14 @@ namespace ScreenRegionMonitor
     class NoColorVerifier : ICaptureVerifier
     {
         public Color ColorToDetect { get; }
+        public int PerPixelTolerance { get; }
 
         private Action<string> logFunc;
 
-        public NoColorVerifier(Color color, Action<string> logFunc)
+        public NoColorVerifier(Color color, int perPixelTolerance, Action<string> logFunc)
         {
             ColorToDetect = color;
+            PerPixelTolerance = perPixelTolerance;
             this.logFunc = logFunc;
         }
         public bool verify(Bitmap captureImage)
@@ -47,9 +49,9 @@ namespace ScreenRegionMonitor
                     var g= (byte)(rgbValues[(column * stride) + (row * 3) + 1]);
                     var r=  (byte)(rgbValues[(column * stride) + (row * 3) + 2]);
 
-                    if (ColorToDetect.Equals(Color.FromArgb(r, g, b))) {
-                        return false;
-                    }
+                    var diffs = (new int[] { r, g, b }).Zip(new int[] { ColorToDetect.R, ColorToDetect.G, ColorToDetect.B }, (current, detect) => Math.Abs(current - detect));
+
+                    if (diffs.All(d => d < PerPixelTolerance)) return false;
                 }
             }
             return true;
