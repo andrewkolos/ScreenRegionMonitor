@@ -93,11 +93,22 @@ namespace ScreenRegionMonitor
                 if (consecutiveFailures > int.Parse(maxConsecutiveFailuresTextBox.Text))
                 {
                     Log("Running commands and stopping.");
-                    SaveCaptures();
-                    SaveDifference();
-                    PrintScreen();
-                    RunCommands();
-                    Stop();
+                    try
+                    {
+                        SaveCaptures();
+                        SaveDifference();
+                        PrintScreen();
+                    }
+                    catch (Exception ex)
+                    {
+                        Log("Exception encountered during screenshot saving process.");
+                        Log(ex.ToString());
+                    }
+                    finally
+                    {
+                        RunCommands();
+                        Stop();
+                    }
                 }
             }
             else
