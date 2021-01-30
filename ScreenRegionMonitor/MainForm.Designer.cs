@@ -43,6 +43,10 @@ namespace ScreenRegionMonitor
             this.toleranceLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.maxConsecutiveFailuresTextBox = new System.Windows.Forms.TextBox();
+            this.modeComboBox = new System.Windows.Forms.ComboBox();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.colorButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // commandTextBox
@@ -55,7 +59,7 @@ namespace ScreenRegionMonitor
             // 
             // captureButton
             // 
-            this.captureButton.Location = new System.Drawing.Point(12, 315);
+            this.captureButton.Location = new System.Drawing.Point(12, 372);
             this.captureButton.Name = "captureButton";
             this.captureButton.Size = new System.Drawing.Size(75, 27);
             this.captureButton.TabIndex = 8;
@@ -66,7 +70,7 @@ namespace ScreenRegionMonitor
             // startButton
             // 
             this.startButton.Enabled = false;
-            this.startButton.Location = new System.Drawing.Point(172, 315);
+            this.startButton.Location = new System.Drawing.Point(172, 372);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(75, 27);
             this.startButton.TabIndex = 10;
@@ -77,7 +81,7 @@ namespace ScreenRegionMonitor
             // stopButton
             // 
             this.stopButton.Enabled = false;
-            this.stopButton.Location = new System.Drawing.Point(252, 315);
+            this.stopButton.Location = new System.Drawing.Point(252, 372);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(75, 27);
             this.stopButton.TabIndex = 11;
@@ -101,7 +105,7 @@ namespace ScreenRegionMonitor
             // 
             // logTextBox
             // 
-            this.logTextBox.Location = new System.Drawing.Point(12, 158);
+            this.logTextBox.Location = new System.Drawing.Point(12, 215);
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.ReadOnly = true;
             this.logTextBox.Size = new System.Drawing.Size(315, 151);
@@ -111,7 +115,7 @@ namespace ScreenRegionMonitor
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 141);
+            this.label2.Location = new System.Drawing.Point(13, 198);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(25, 13);
             this.label2.TabIndex = 6;
@@ -119,7 +123,7 @@ namespace ScreenRegionMonitor
             // 
             // testCommandsButton
             // 
-            this.testCommandsButton.Location = new System.Drawing.Point(92, 315);
+            this.testCommandsButton.Location = new System.Drawing.Point(92, 372);
             this.testCommandsButton.Name = "testCommandsButton";
             this.testCommandsButton.Size = new System.Drawing.Size(75, 27);
             this.testCommandsButton.TabIndex = 9;
@@ -159,11 +163,35 @@ namespace ScreenRegionMonitor
             this.maxConsecutiveFailuresTextBox.Size = new System.Drawing.Size(173, 20);
             this.maxConsecutiveFailuresTextBox.TabIndex = 5;
             // 
+            // modeComboBox
+            // 
+            this.modeComboBox.FormattingEnabled = true;
+            this.modeComboBox.Items.AddRange(new object[] {
+            "Detect Change",
+            "Detect Specific Color"});
+            this.modeComboBox.Location = new System.Drawing.Point(16, 145);
+            this.modeComboBox.Name = "modeComboBox";
+            this.modeComboBox.Size = new System.Drawing.Size(311, 21);
+            this.modeComboBox.TabIndex = 12;
+            this.modeComboBox.SelectedIndexChanged += new System.EventHandler(this.modeComboBox_SelectedIndexChanged);
+            // 
+            // colorButton
+            // 
+            this.colorButton.Location = new System.Drawing.Point(16, 173);
+            this.colorButton.Name = "colorButton";
+            this.colorButton.Size = new System.Drawing.Size(311, 23);
+            this.colorButton.TabIndex = 13;
+            this.colorButton.Text = "Pick Color";
+            this.colorButton.UseVisualStyleBackColor = true;
+            this.colorButton.Click += new System.EventHandler(this.colorButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(339, 357);
+            this.ClientSize = new System.Drawing.Size(338, 408);
+            this.Controls.Add(this.colorButton);
+            this.Controls.Add(this.modeComboBox);
             this.Controls.Add(this.maxConsecutiveFailuresTextBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.toleranceLabel);
@@ -200,6 +228,10 @@ namespace ScreenRegionMonitor
         private System.Windows.Forms.Label toleranceLabel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox maxConsecutiveFailuresTextBox;
+        private System.Windows.Forms.ComboBox modeComboBox;
+        private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.Button colorButton;
     }
 }
 
